@@ -243,9 +243,8 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <p class="pin-title">Бөлімді ашу · Разблокировать</p>
     <p class="pin-sub" id="pinSubtitle">
     Введите PIN-код<br>
-    <span style="opacity:0.45;font-size:0.85rem">
-    Подсказка: особенная дата: 1022
-    </span>
+    1022
+   
     </p>
     <div class="pin-dots" id="pinDots">
       <div class="pin-dot"></div><div class="pin-dot"></div>
@@ -342,7 +341,7 @@ const chapters = [
    details:[{icon:'🌷',text:'Жылу · Тепло'},{icon:'🤝',text:'Сыйлас · Уважение'}],
    atmosphere:['Шынайылық · Искренность','Сенімділік · Серьёзность','Жылылық · Тепло'],extra:'home'},
   {id:6,tag:'Алтыншы бөлім · Глава VI',emoji:'👨‍👩‍👦',title:'Сенің жақын адамдарыңмен бірге болу.',titleRu:'Томка. Жанатбек. Ақнұр басқалары да',
-   quote:'«Сенің әлеміңнің бір бөлігі болғанды қалаймын.»',
+   quote:'«Сенің әлеміңнің бір бөлігі болғым келеді.»',
    details:[{icon:'🕯️',text:'Үй жылулығы · Домашний уют'},{icon:'🍽️',text:'Үй асы · Домашний ужин'}],
    atmosphere:['Шынайы · Настоящее','Үй · Дом','Отбасы · Семья'],extra:'family'},
   {id:7,tag:'Жетінші бөлім · Глава VII',emoji:'✦',title:'Бірге.',titleRu:'Вместе.',
@@ -381,7 +380,7 @@ document.addEventListener('mousemove',e=>{mox=(e.clientX/innerWidth-0.5)*28;moy=
 })();
 
 // ═══ TYPEWRITER ═══
-const TW = '«Мен бізде болғанды қайта салғым келеді — және одан да көп.»';
+const TW = '«Кейбір әңгімелер ешқашан бітпейді... олар жай ғана жалғасын күтеді.»';
 const twEl = document.getElementById('typewriterEl');
 let twI = 0;
 function typeIt(){

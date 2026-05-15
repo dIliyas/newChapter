@@ -282,7 +282,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 // ═══ CONFIG ═══
 const PIN = '1022';
 const STORAGE_KEY = 'journey_v4';
-const TARGET_DATE = new Date('2026-05-15T20:00:00');
+const TARGET_DATE = new Date('2026-05-16T18:00:00');
 
 // Per-chapter background colors (body bg during modal)
 const chapterBgs = [
@@ -538,7 +538,7 @@ function renderChapters(){
       </div>
       <div class="chapter-content">
         <div class="chapter-tag">${ch.tag}</div>
-        <div class="chapter-title">${ch.title}</div>
+        <div class="chapter-title">${isUnlocked ? ch.title : '✦ ✦ ✦'}</div>
         <div class="chapter-desc">${isUnlocked?ch.quote.replace(/\n/g,' '):'— Бұл бөлім әлі жабық · Этот этап ещё закрыт —'}</div>
       </div>
       ${!isUnlocked?'<div class="lock-icon">🔒</div>':''}

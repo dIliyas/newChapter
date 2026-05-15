@@ -1,730 +1,667 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Біздің хикаямыз</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Бөлім / 7 Глав</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+:root {
+  --gold:#c9a96e; --gold-dim:rgba(201,169,110,0.3); --gold-glow:rgba(201,169,110,0.1);
+  --dark:#080608; --dark2:#0f0c12; --cream:#f0e6d3;
+  --muted:rgba(240,230,211,0.45); --locked:rgba(240,230,211,0.12);
+  --rose:#8b2252; --rose2:#c44b7a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--cream);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden;transition:background 1.2s ease}
 
-:root{
-  --bg:#090909;
-  --card:#111111;
-  --gold:#c9a96e;
-  --gold2:#f1d7a1;
-  --text:#f5ede0;
-  --muted:#85786a;
-  --rose:#8d234f;
+/* noise */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5}
+
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;z-index:10}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp 1s 0.3s forwards}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,8vw,5.5rem);font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:10px;opacity:0;animation:fadeUp 1s 0.6s forwards}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-subtitle{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.4em;color:var(--gold);opacity:0;margin-bottom:36px;animation:fadeUp 1s 0.75s forwards}
+.hero-divider{display:flex;align-items:center;gap:16px;margin-bottom:40px;opacity:0;animation:fadeUp 1s 1s forwards}
+.hdl{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--gold-dim))}
+.hdl.r{background:linear-gradient(to left,transparent,var(--gold-dim))}
+.hero-divider span{color:var(--gold);font-size:0.7rem;opacity:0.6}
+
+/* TYPEWRITER */
+.hero-quote{font-size:clamp(1.1rem,3vw,1.5rem);font-style:italic;color:var(--cream);max-width:500px;line-height:1.7;margin-bottom:52px;opacity:0;animation:fadeUp 1s 1.2s forwards;min-height:4em;position:relative}
+.hero-quote::after{content:'|';animation:blink 0.8s step-end infinite;color:var(--gold);margin-left:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.btn-start{font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--gold),#e8c98a);border:none;padding:18px 52px;cursor:pointer;border-radius:2px;box-shadow:0 8px 32px rgba(201,169,110,0.25);transition:all 0.3s;opacity:0;animation:fadeUp 1s 1.5s forwards}
+.btn-start:hover{box-shadow:0 14px 50px rgba(201,169,110,0.45);transform:translateY(-3px)}
+
+/* ── CHAPTERS ── */
+.chapters-section{position:relative;z-index:10;padding:80px 24px 160px;max-width:900px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:64px}
+.section-header h2{font-family:'Cinzel',serif;font-size:clamp(1rem,3vw,1.5rem);font-weight:400;color:var(--gold);letter-spacing:0.2em;margin-bottom:8px}
+.section-header p{font-style:italic;color:var(--muted);font-size:1rem}
+
+/* progress */
+.progress-bar{display:flex;align-items:center;justify-content:center;margin-bottom:64px;padding:0 16px}
+.progress-dot{width:30px;height:30px;border-radius:50%;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:0.6rem;color:var(--locked);transition:all 0.6s;flex-shrink:0}
+.progress-dot.unlocked{border-color:var(--gold);color:var(--gold);box-shadow:0 0 14px rgba(201,169,110,0.35)}
+.progress-dot.active{background:var(--gold);color:var(--dark);box-shadow:0 0 20px rgba(201,169,110,0.5)}
+.progress-line{flex:1;height:1px;background:var(--gold-dim);min-width:16px;transition:background 0.6s}
+.progress-line.lit{background:var(--gold)}
+
+/* chapter cards */
+.chapter-card{display:grid;grid-template-columns:80px 1fr;gap:28px;margin-bottom:36px;padding:32px 36px;border:1px solid rgba(201,169,110,0.1);border-radius:3px;position:relative;overflow:hidden;transition:all 0.4s;cursor:pointer;background:linear-gradient(135deg,rgba(15,12,18,0.92),rgba(8,6,8,0.97))}
+.chapter-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--gold),transparent);opacity:0;transition:opacity 0.4s}
+.chapter-card.unlocked::before{opacity:1}
+.chapter-card.locked{cursor:default;opacity:0.5;filter:grayscale(0.4)}
+.chapter-card:not(.locked):hover{border-color:var(--gold-dim);transform:translateX(5px);box-shadow:0 10px 50px rgba(0,0,0,0.6)}
+
+/* Per-chapter color accent on hover */
+.chapter-card[data-color]:not(.locked):hover::after{content:'';position:absolute;inset:0;opacity:0.06;border-radius:3px;background:attr(data-color)}
+
+.chapter-num{display:flex;flex-direction:column;align-items:center;gap:6px}
+.chapter-num-text{font-family:'Cinzel',serif;font-size:2rem;font-weight:400;color:var(--gold);line-height:1;opacity:0.25;transition:opacity 0.4s}
+.chapter-card.unlocked .chapter-num-text{opacity:1}
+.chapter-num-label{font-family:'Cinzel',serif;font-size:0.48rem;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase}
+
+/* countdown on locked cards */
+.card-countdown{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.08em;color:rgba(201,169,110,0.4);margin-top:8px;text-align:center;line-height:1.6}
+.card-countdown .cd-num{color:rgba(201,169,110,0.7);font-size:0.6rem}
+
+.chapter-content{min-width:0}
+.chapter-tag{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;opacity:0.7}
+.chapter-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:400;color:var(--cream);margin-bottom:8px;line-height:1.3}
+.chapter-card.locked .chapter-title{color:var(--locked)}
+.chapter-desc{font-size:0.92rem;font-style:italic;color:var(--muted);line-height:1.6}
+.chapter-card.locked .chapter-desc{opacity:0.4}
+.lock-icon{position:absolute;right:28px;top:50%;transform:translateY(-50%);font-size:1rem;opacity:0.2}
+.unlock-btn{position:absolute;right:18px;bottom:14px;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.2em;color:var(--gold);border:1px solid var(--gold-dim);background:transparent;padding:6px 14px;cursor:pointer;border-radius:2px;text-transform:uppercase;transition:all 0.2s;opacity:0}
+.chapter-card.locked:hover .unlock-btn{opacity:1}
+.unlock-btn:hover{background:var(--gold-glow)}
+
+/* ── MODAL — BOOK OPEN ── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;overflow-y:auto;transition:background 1s ease}
+.modal-overlay.open{display:flex;animation:cinemaIn 0.65s ease}
+@keyframes cinemaIn{
+  0%{clip-path:inset(50% 0 50% 0);opacity:0}
+  70%{clip-path:inset(0 0 0 0);opacity:0.9}
+  100%{clip-path:inset(0 0 0 0);opacity:1}
+}
+.modal-inner{min-height:100vh;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;position:relative}
+.modal-close{position:fixed;top:24px;right:28px;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--muted);cursor:pointer;border:1px solid rgba(240,230,211,0.12);padding:8px 18px;border-radius:2px;background:transparent;transition:all 0.2s;z-index:10}
+.modal-close:hover{color:var(--cream);border-color:var(--gold-dim)}
+
+/* BOOK OPEN animation */
+.modal-content{max-width:680px;width:100%;text-align:center;animation:bookOpen 0.8s cubic-bezier(.23,1,.32,1) both}
+@keyframes bookOpen{
+  0%{opacity:0;transform:perspective(1000px) rotateY(-25deg) scale(0.88);filter:blur(4px)}
+  60%{filter:blur(0)}
+  100%{opacity:1;transform:perspective(1000px) rotateY(0deg) scale(1);filter:blur(0)}
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+.modal-chapter-num{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0.7}
+.modal-emoji{font-size:3.2rem;margin-bottom:20px;display:block;animation:floatE 4s ease-in-out infinite}
+@keyframes floatE{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:300;color:var(--cream);line-height:1.2;margin-bottom:18px}
+.modal-divider{display:flex;align-items:center;gap:14px;margin:0 auto 28px;max-width:280px}
+.mdl{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold-dim))}
+.mdl.r{background:linear-gradient(to left,transparent,var(--gold-dim))}
+.modal-divider span{color:var(--gold);opacity:0.5;font-size:0.65rem}
+.modal-quote{font-size:clamp(1.05rem,2.5vw,1.35rem);font-style:italic;color:var(--cream);line-height:1.7;margin-bottom:32px;opacity:0.9}
+.modal-details{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.modal-detail{display:flex;align-items:center;justify-content:center;gap:12px;font-size:1rem;color:var(--muted);font-style:italic}
+.modal-atmosphere{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px}
+.atmosphere-tag{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-dim);padding:6px 14px;border-radius:2px}
+
+/* candles */
+.candles{display:flex;gap:20px;justify-content:center;margin:28px 0}
+.candle{position:relative;display:flex;flex-direction:column;align-items:center}
+.flame{width:10px;height:18px;background:radial-gradient(ellipse at 50% 80%,#fff 0%,#ffd700 40%,#ff8c00 80%,transparent 100%);border-radius:50% 50% 20% 20%;animation:flicker 1.5s ease-in-out infinite alternate;margin-bottom:-2px}
+@keyframes flicker{0%{transform:scaleX(1) rotate(-1deg);opacity:0.9}50%{transform:scaleX(0.85) rotate(2deg);opacity:1}100%{transform:scaleX(1.05) rotate(-2deg);opacity:0.85}}
+.candle-body{width:12px;height:50px;background:linear-gradient(to right,#e8e0d0,#f5f0e8,#ddd5c2);border-radius:2px}
+.candle-glow{position:absolute;top:-4px;width:26px;height:26px;background:radial-gradient(circle,rgba(255,200,50,0.4),transparent 70%);border-radius:50%;animation:gp 1.5s ease-in-out infinite alternate}
+@keyframes gp{from{opacity:0.6;transform:scale(1)}to{opacity:1;transform:scale(1.25)}}
+
+/* ferris */
+.ferris-wrap{display:flex;justify-content:center;margin:24px 0}
+.ferris-wheel{position:relative;width:110px;height:110px}
+.wheel-circle{width:90px;height:90px;border:2px solid var(--gold-dim);border-radius:50%;position:absolute;top:10px;left:10px;animation:spinW 8s linear infinite}
+@keyframes spinW{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.wheel-spoke{position:absolute;width:1px;height:45px;background:var(--gold-dim);top:10px;left:54px;transform-origin:bottom center}
+.wheel-cabin{position:absolute;width:12px;height:9px;background:var(--gold);border-radius:2px;top:4px;left:49px;opacity:0.6}
+.wheel-center{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--gold);top:50px;left:50px;opacity:0.9}
+
+/* film */
+.film-card{border:1px solid var(--gold-dim);border-radius:3px;padding:22px 28px;margin:20px auto;max-width:340px;background:rgba(201,169,110,0.03);text-align:left}
+.film-row{display:flex;justify-content:space-between;font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase;margin-bottom:7px}
+.film-row span:last-child{color:var(--gold)}
+
+/* timer */
+.timer-box{display:flex;gap:14px;justify-content:center;margin:24px 0}
+.timer-unit{text-align:center}
+.timer-num{font-family:'Cinzel',serif;font-size:1.9rem;color:var(--gold);font-weight:400;line-height:1;display:block}
+.timer-label{font-size:0.55rem;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;margin-top:4px;display:block}
+.timer-colon{font-size:1.9rem;color:var(--gold-dim);line-height:1;padding-top:2px}
+
+/* btns */
+.btn-accept{font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dark);background:linear-gradient(135deg,var(--gold),#e8c98a);border:none;padding:15px 40px;cursor:pointer;border-radius:2px;box-shadow:0 6px 24px rgba(201,169,110,0.25);transition:all 0.3s;margin-top:10px}
+.btn-accept:hover{box-shadow:0 10px 36px rgba(201,169,110,0.45);transform:translateY(-2px)}
+
+/* ── MUSIC PLAYER ── */
+#musicPlayer{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:900;background:rgba(12,9,15,0.95);backdrop-filter:blur(20px);border:1px solid rgba(201,169,110,0.2);border-radius:50px;padding:10px 22px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 36px rgba(0,0,0,0.7);min-width:290px;max-width:92vw}
+#musicTitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85rem;color:rgba(240,230,211,0.55);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#musicControls{display:flex;align-items:center;gap:7px;flex-shrink:0}
+#musicControls button{background:transparent;border:none;color:var(--gold);cursor:pointer;font-size:0.72rem;padding:6px 8px;border-radius:50%;transition:all 0.2s;line-height:1;opacity:0.65}
+#musicControls button:hover{opacity:1;background:rgba(201,169,110,0.1)}
+#playBtn{width:32px!important;height:32px!important;border:1px solid rgba(201,169,110,0.3)!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;opacity:1!important;font-size:0.75rem!important}
+
+/* ── TOAST ── */
+.toast{position:fixed;top:24px;left:50%;transform:translateX(-50%) translateY(-80px);background:rgba(12,9,15,0.96);border:1px solid rgba(201,169,110,0.25);border-radius:50px;padding:12px 28px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--gold);box-shadow:0 8px 32px rgba(0,0,0,0.6);z-index:2000;opacity:0;transition:all 0.5s cubic-bezier(.23,1,.32,1);pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ── PIN ── */
+.pin-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,6,8,0.96);align-items:center;justify-content:center}
+.pin-overlay.open{display:flex;animation:fadeIn 0.3s ease}
+.pin-box{text-align:center;padding:52px 48px;border:1px solid var(--gold-dim);background:var(--dark2);max-width:340px;width:88vw;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.8);animation:popIn 0.4s cubic-bezier(.23,1,.32,1)}
+.pin-box::before,.pin-box::after{content:'';position:absolute;width:26px;height:26px;border-color:var(--gold-dim);border-style:solid}
+.pin-box::before{top:10px;left:10px;border-width:1px 0 0 1px}
+.pin-box::after{bottom:10px;right:10px;border-width:0 1px 1px 0}
+.pin-title{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.pin-sub{font-style:italic;color:var(--muted);font-size:0.92rem;margin-bottom:28px}
+.pin-dots{display:flex;gap:12px;justify-content:center;margin-bottom:24px}
+.pin-dot{width:13px;height:13px;border-radius:50%;border:1px solid var(--gold-dim);transition:all 0.2s}
+.pin-dot.filled{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px rgba(201,169,110,0.5)}
+.pin-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:210px;margin:0 auto 14px}
+.pin-key{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--cream);border:1px solid rgba(240,230,211,0.1);background:transparent;padding:13px;cursor:pointer;border-radius:2px;transition:all 0.15s}
+.pin-key:hover{background:var(--gold-glow);border-color:var(--gold-dim);color:var(--gold)}
+.pin-key.zero{grid-column:2}
+.pin-key.del{color:var(--muted);font-size:0.75rem;letter-spacing:0.1em}
+.pin-error{font-style:italic;color:#c44b7a;font-size:0.88rem;min-height:20px}
+.pin-cancel{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.25em;color:var(--muted);background:transparent;border:none;cursor:pointer;text-transform:uppercase;margin-top:18px;padding:8px;transition:color 0.2s}
+.pin-cancel:hover{color:var(--cream)}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:600px){
+  .chapter-card{grid-template-columns:48px 1fr;gap:14px;padding:22px 18px}
+  .chapter-num-text{font-size:1.4rem}
+  .lock-icon{display:none}
+  .modal-inner{padding:80px 18px 40px}
+  #musicPlayer{min-width:240px}
 }
 
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  background:
-    radial-gradient(circle at top,#1a1118 0%,#090909 60%);
-  color:var(--text);
-  font-family:'Cormorant Garamond', serif;
-  overflow-x:hidden;
-}
-
-/* glow */
-
-.glow{
-  position:fixed;
-  width:500px;
-  height:500px;
-  border-radius:50%;
-  filter:blur(120px);
-  z-index:0;
-  pointer-events:none;
-}
-
-.glow1{
-  background:rgba(141,35,79,.15);
-  top:-150px;
-  left:-100px;
-}
-
-.glow2{
-  background:rgba(201,169,110,.08);
-  bottom:-200px;
-  right:-100px;
-}
-
-/* hearts */
-
-.hearts{
-  position:fixed;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:1;
-}
-
-.heart{
-  position:absolute;
-  color:rgba(255,105,180,.25);
-  animation:floatUp linear infinite;
-  font-size:20px;
-}
-
-@keyframes floatUp{
-
-  0%{
-    transform:translateY(100vh) scale(.5);
-    opacity:0;
-  }
-
-  20%{
-    opacity:1;
-  }
-
-  100%{
-    transform:translateY(-120vh) scale(1.3);
-    opacity:0;
-  }
-
-}
-
-/* HERO */
-
-.hero{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
-  z-index:2;
-  padding:40px;
-}
-
-.hero-content{
-  max-width:700px;
-}
-
-.eyebrow{
-  color:var(--gold);
-  letter-spacing:.4em;
-  text-transform:uppercase;
-  font-size:.7rem;
-  margin-bottom:20px;
-  font-family:'Cinzel', serif;
-}
-
-.hero h1{
-  font-family:'Cinzel', serif;
-  font-size:4rem;
-  line-height:1.2;
-  margin-bottom:25px;
-  font-weight:400;
-}
-
-.hero p{
-  color:rgba(245,237,224,.7);
-  font-size:1.4rem;
-  line-height:1.7;
-  margin-bottom:40px;
-}
-
-.start-btn{
-  padding:16px 44px;
-  border:none;
-  background:
-    linear-gradient(
-      135deg,
-      var(--rose),
-      #c44b7a
-    );
-  color:white;
-  cursor:pointer;
-  font-family:'Cinzel', serif;
-  letter-spacing:.15em;
-  font-size:.8rem;
-  text-transform:uppercase;
-  border-radius:50px;
-  transition:.3s;
-}
-
-.start-btn:hover{
-  transform:translateY(-4px);
-  box-shadow:0 10px 30px rgba(141,35,79,.4);
-}
-
-.scroll-arrow{
-  margin-top:20px;
-  font-size:2rem;
-  color:var(--gold);
-  animation:bounce 1.5s infinite;
-}
-
-@keyframes bounce{
-
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(10px);
-  }
-
-}
-
-/* timeline */
-
-.timeline{
-  width:min(1000px,90%);
-  margin:auto;
-  padding-bottom:120px;
-  position:relative;
-  z-index:2;
-}
-
-.timeline::before{
-  content:'';
-  position:absolute;
-  left:50%;
-  top:0;
-  width:1px;
-  height:100%;
-  background:
-    linear-gradient(
-      to bottom,
-      transparent,
-      rgba(201,169,110,.4),
-      transparent
-    );
-}
-
-.chapter{
-  width:45%;
-  background:rgba(17,17,17,.85);
-  border:1px solid rgba(201,169,110,.12);
-  padding:35px;
-  margin:70px 0;
-  position:relative;
-  backdrop-filter:blur(10px);
-  transition:.4s;
-  border-radius:24px;
-}
-
-.chapter:hover{
-  transform:translateY(-6px);
-}
-
-.chapter:nth-child(odd){
-  margin-right:auto;
-}
-
-.chapter:nth-child(even){
-  margin-left:auto;
-}
-
-.chapter::before{
-  content:'';
-  position:absolute;
-  top:40px;
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background:var(--gold);
-}
-
-.chapter:nth-child(odd)::before{
-  right:-54px;
-}
-
-.chapter:nth-child(even)::before{
-  left:-54px;
-}
-
-.chapter-number{
-  color:var(--gold);
-  font-family:'Cinzel', serif;
-  letter-spacing:.2em;
-  font-size:.75rem;
-  margin-bottom:15px;
-}
-
-.chapter h2{
-  font-size:2rem;
-  margin-bottom:18px;
-  font-family:'Cinzel', serif;
-  font-weight:400;
-}
-
-.chapter p{
-  color:rgba(245,237,224,.72);
-  line-height:1.7;
-  font-size:1.15rem;
-}
-
-.chapter-date{
-  margin-top:20px;
-  color:var(--gold2);
-  font-style:italic;
-}
-
-.open-btn{
-  margin-top:24px;
-  display:inline-block;
-  padding:12px 24px;
-  border:1px solid rgba(201,169,110,.3);
-  color:var(--gold);
-  text-decoration:none;
-  font-family:'Cinzel', serif;
-  letter-spacing:.1em;
-  transition:.3s;
-  border-radius:50px;
-}
-
-.open-btn:hover{
-  background:rgba(201,169,110,.08);
-}
-
-/* SECRET CHAPTERS */
-
-.mystery{
-  position:relative;
-  opacity:.58;
-  overflow:hidden;
-  transition:.5s;
-  filter:saturate(.65);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(17,17,17,.85),
-      rgba(10,10,10,.95)
-    );
-}
-
-.mystery::after{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.12),
-      rgba(0,0,0,.6)
-    );
-  backdrop-filter:blur(7px);
-  pointer-events:none;
-  transition:.5s;
-}
-
-.mystery::before{
-  box-shadow:
-    0 0 25px rgba(201,169,110,.45),
-    0 0 55px rgba(201,169,110,.18);
-}
-
-.mystery h2,
-.mystery p,
-.mystery .chapter-number{
-  color:rgba(255,255,255,.14);
-  text-shadow:
-    0 0 10px rgba(255,255,255,.08),
-    0 0 25px rgba(255,255,255,.04);
-  transition:.4s;
-}
-
-.mystery:hover{
-  opacity:.9;
-  transform:translateY(-5px);
-  border-color:rgba(201,169,110,.35);
-}
-
-.mystery:hover::after{
-  backdrop-filter:blur(2px);
-  background:rgba(0,0,0,.28);
-}
-
-.mystery:hover h2,
-.mystery:hover p,
-.mystery:hover .chapter-number{
-  color:rgba(255,255,255,.48);
-}
-
-.secret-text{
-  margin-top:18px;
-  font-size:.78rem;
-  letter-spacing:.35em;
-  text-transform:uppercase;
-  color:rgba(201,169,110,.35);
-  font-family:'Cinzel', serif;
-}
-
-/* music */
-
-.music-player{
-  position:fixed;
-  top:20px;
-  right:20px;
-  z-index:999;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:rgba(0,0,0,.45);
-  padding:12px 16px;
-  border-radius:50px;
-  border:1px solid rgba(201,169,110,.25);
-  backdrop-filter:blur(10px);
-}
-
-.music-player button{
-  background:none;
-  border:none;
-  color:var(--gold);
-  font-size:1.2rem;
-  cursor:pointer;
-}
-
-.music-title{
-  color:var(--gold2);
-  font-size:.85rem;
-  font-family:'Cinzel', serif;
-}
-
-/* modal */
-
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-
-.modal-content{
-  background:#111;
-  border:1px solid rgba(201,169,110,.3);
-  padding:40px;
-  border-radius:30px;
-  max-width:500px;
-  width:90%;
-  text-align:center;
-}
-
-.close-btn{
-  margin-top:20px;
-  padding:12px 24px;
-  border:none;
-  background:linear-gradient(135deg,var(--rose),#c44b7a);
-  color:white;
-  border-radius:40px;
-  cursor:pointer;
-}
-
-/* mobile */
-
-@media(max-width:900px){
-
-  .hero h1{
-    font-size:2.7rem;
-  }
-
-  .timeline::before{
-    left:20px;
-  }
-
-  .chapter{
-    width:100%;
-    margin-left:40px !important;
-  }
-
-  .chapter::before{
-    left:-29px !important;
-  }
-
-}
-
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
 </style>
 </head>
 <body>
 
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
+<canvas id="stars"></canvas>
 
-<div class="hearts">
-  <span class="heart" style="left:10%; animation-duration:8s;">❤</span>
-  <span class="heart" style="left:25%; animation-duration:11s;">❤</span>
-  <span class="heart" style="left:40%; animation-duration:9s;">❤</span>
-  <span class="heart" style="left:60%; animation-duration:12s;">❤</span>
-  <span class="heart" style="left:75%; animation-duration:10s;">❤</span>
-  <span class="heart" style="left:90%; animation-duration:7s;">❤</span>
-</div>
-
-<div class="music-player">
-
-  <button onclick="prevMusic()">⏮</button>
-  <button onclick="toggleMusic()">🎵</button>
-  <button onclick="nextMusic()">⏭</button>
-
-  <div class="music-title" id="musicTitle">
-    Мирас Жугунусов — Beri qara
+<!-- HERO -->
+<section class="hero" id="heroSection">
+  <p class="hero-eyebrow">Жеке тарих · Личная история</p>
+  <h1 class="hero-title">7 <em>Бөлім</em></h1>
+  <p class="hero-subtitle">7 Глав · Чтобы влюбиться снова</p>
+  <div class="hero-divider">
+    <div class="hdl"></div><span>✦</span><div class="hdl r"></div>
   </div>
+  <p class="hero-quote" id="typewriterEl"></p>
+  <button class="btn-start" onclick="scrollToChapters()">Тарихты бастау · Начать историю</button>
+</section>
 
+<!-- CHAPTERS -->
+<section class="chapters-section" id="chaptersSection">
+  <div class="section-header reveal">
+    <h2>✦ &nbsp; Жол картасы &nbsp; ✦</h2>
+    <p>Маршрут · Каждый этап — новая страница</p>
+  </div>
+  <div class="progress-bar" id="progressBar"></div>
+  <div id="chapterList"></div>
+</section>
+
+<!-- CHAPTER MODAL -->
+<div class="modal-overlay" id="chapterModal">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModal()">✕ &nbsp; ЖАБУ / ЗАКРЫТЬ</button>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
 </div>
 
+<!-- PIN MODAL -->
+<div class="pin-overlay" id="pinOverlay">
+  <div class="pin-box">
+    <p class="pin-title">Бөлімді ашу · Разблокировать</p>
+    <p class="pin-sub" id="pinSubtitle">Введите PIN-код</p>
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot"></div><div class="pin-dot"></div>
+      <div class="pin-dot"></div><div class="pin-dot"></div>
+    </div>
+    <div class="pin-keys">
+      <button class="pin-key" onclick="pinKey('1')">1</button>
+      <button class="pin-key" onclick="pinKey('2')">2</button>
+      <button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button>
+      <button class="pin-key" onclick="pinKey('5')">5</button>
+      <button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button>
+      <button class="pin-key" onclick="pinKey('8')">8</button>
+      <button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key zero" onclick="pinKey('0')">0</button>
+      <button class="pin-key del" onclick="pinDel()">DEL</button>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+    <button class="pin-cancel" onclick="closePinModal()">БОЛДЫРМАУ · ОТМЕНА</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toastEl"></div>
+
+<!-- MUSIC -->
 <audio id="bgMusic"></audio>
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <div class="eyebrow">
-      БІЗДІҢ ХИКАЯМЫЗ
-    </div>
-
-    <h1>
-      7 бөлім.<br>
-      7 мүмкіндік.<br>
-      1 махаббат.
-
-     
-    </h1>
-<br>
-<h2> (10&22)</h2>
-    <p>
-   7 Chapters. One Love.
-    </p>
-
-    <button class="start-btn" onclick="scrollToTimeline()">
-      Хикаяны бастау →
-    </button>
-
-    <div class="scroll-arrow">
-      ↓
-    </div>
-
+<div id="musicPlayer">
+  <div id="musicTitle">✦ Музыка...</div>
+  <div id="musicControls">
+    <button onclick="prevMusic()">&#9664;&#9664;</button>
+    <button id="playBtn" onclick="toggleMusic()">&#9654;</button>
+    <button onclick="nextMusic()">&#9654;&#9654;</button>
   </div>
-
-</section>
-
-<section class="timeline" id="timeline">
-
-  <!-- visible chapter -->
-
-  <div class="chapter">
-
-    <div class="chapter-number">
-      АЛҒАШҚЫ КЕЗДЕСУ
-    </div>
-
-    <h2>Арнайы кеш</h2>
-
-    <p>
-      Бұл жай ғана кездесу емес.<br>
-      Бұл — жаңа бастама.
-    </p>
-
-    <div class="chapter-date">
-      15 Мамыр · 20:00
-    </div>
-
-    <a href="#" class="open-btn" onclick="openDate(event)">
-      Ақпаратты ашу
-    </a>
-
-  </div>
-
-  <!-- mystery -->
-
-  <div class="chapter mystery">
-
-    <div class="chapter-number">
-      БӨЛІМ 02
-    </div>
-
-    <h2>Түнгі серуен</h2>
-
-    <p>
-      Кейбір естеліктер<br>
-      тек түнде тіріледі...
-    </p>
-
-    <div class="secret-text">
-      locked memory
-    </div>
-
-  </div>
-
-  <div class="chapter mystery">
-
-    <div class="chapter-number">
-      БӨЛІМ 03
-    </div>
-
-    <h2>Белгісіз орын</h2>
-
-    <p>
-      Бұл жерді<br>
-      тек екеуміз білеміз.
-    </p>
-
-    <div class="secret-text">
-      hidden chapter
-    </div>
-
-  </div>
-
-  <div class="chapter mystery">
-
-    <div class="chapter-number">
-      БӨЛІМ 04
-    </div>
-
-    <h2>Midnight Call</h2>
-
-    <p>
-      Түнгі әңгімелер<br>
-      бәрін өзгертеді.
-    </p>
-
-    <div class="secret-text">
-      not unlocked
-    </div>
-
-  </div>
-
-</section>
-
-<div class="modal" id="dateModal">
-
-  <div class="modal-content">
-
-    <h2>📍 Кездесу орны</h2>
-
-    <p>
-      Pika<br><br>
-
-      ⏰ Уақыты: 20:00<br>
-      📍 Адрес: Құрманғазы, 31<br><br>
-
-      Сені күтемін ❤️
-    </p>
-
-    <button class="close-btn" onclick="closeModal()">
-      Жабу
-    </button>
-
-  </div>
-
 </div>
 
 <script>
+// ═══ CONFIG ═══
+const PIN = '1022';
+const STORAGE_KEY = 'journey_v4';
+const TARGET_DATE = new Date('2026-05-15T20:00:00');
 
-function scrollToTimeline(){
-
-  document.getElementById('timeline')
-  .scrollIntoView({
-    behavior:'smooth'
-  });
-
-}
-
-/* music */
-
-const music = document.getElementById('bgMusic');
-const title = document.getElementById('musicTitle');
-
-const playlist = [
-
-  {
-    src:"Мирас Жугунусов_Beri qara.mp3",
-    title:"Мирас Жугунусов — Beri qara"
-  },
-
-  {
-    src:"Duman_миллион.mp3",
-    title:"Duman — миллион"
-  },
-
-  {
-    src:"6ellucci Boleksin.mp3",
-    title:"6ellucci — Boleksin"
-  },
-
+// Per-chapter background colors (body bg during modal)
+const chapterBgs = [
+  '#0d0805',  // 1 - warm dark amber
+  '#060d08',  // 2 - deep forest green
+  '#0d0608',  // 3 - electric rose dark
+  '#05060d',  // 4 - cinematic blue dark
+  '#0d0a05',  // 5 - warm home gold
+  '#080a0d',  // 6 - cool family blue
+  '#0a0608',  // 7 - deep rose final
 ];
 
-let currentTrack = 0;
+const chapterAccents = [
+  'rgba(201,169,110,0.12)',
+  'rgba(100,160,100,0.1)',
+  'rgba(200,80,130,0.1)',
+  'rgba(80,120,200,0.1)',
+  'rgba(201,160,80,0.1)',
+  'rgba(100,130,180,0.1)',
+  'rgba(180,80,120,0.1)',
+];
 
-music.src = playlist[currentTrack].src;
-title.innerText = playlist[currentTrack].title;
+const chapterMusic = [
+  {src:'Мирас Жугунусов_Beri qara.mp3', title:'Мирас Жугунусов — Beri qara'},
+  {src:'Duman_миллион.mp3',              title:'Duman — миллион'},
+  {src:'6ellucci Boleksin.mp3',          title:'6ellucci — Boleksin'},
+  {src:'Мирас Жугунусов_Beri qara.mp3', title:'Мирас Жугунусов — Beri qara'},
+  {src:'Duman_миллион.mp3',              title:'Duman — миллион'},
+  {src:'6ellucci Boleksin.mp3',          title:'6ellucci — Boleksin'},
+  {src:'Мирас Жугунусов_Beri qara.mp3', title:'Мирас Жугунусов — Beri qara'},
+];
 
+const chapters = [
+  {id:1,tag:'Бірінші бөлім · Глава I',emoji:'🕯️',title:'Кафе. Кешкі от.',titleRu:'Кафе. Вечерний огонь.',
+   quote:'«Без споров. Без прошлого.\nПросто ты и я.»',
+   details:[{icon:'🕗',text:'Кешке · Вечером'},{icon:'👗',text:'Дресс-код жоқ — ыңғайлысын кий'},{icon:'🎵',text:'Жайлы музыка · Тихая музыка'}],
+   atmosphere:['Шарап · Вино','Шырақ · Свечи','Жайлылық · Уют','Сұхбат · Разговор'],extra:'candles',timer:true,acceptLabel:'Дресс-кодты қабылдаймын · Принять ✓'},
+  {id:2,tag:'Екінші бөлім · Глава II',emoji:'🎸',title:'Гитара. Бақша.',titleRu:'Гитара. Парк.',
+   quote:'«Кейбір нәрселерді сөзбен айта алмадым.\nСондықтан ойнаймын.»',
+   details:[{icon:'🌳',text:'Ашық аспан астында · Под открытым небом'},{icon:'🎵',text:'Тірі музыка · Живая музыка'}],
+   atmosphere:['Гитара','Жұлдыздар · Звёзды','Табиғат · Природа','Сезім · Эмоция'],extra:'guitar'},
+  {id:3,tag:'Үшінші бөлім · Глава III',emoji:'🎡',title:'Адреналин. Аттракцион.',titleRu:'Адреналин. Аттракционы.',
+   quote:'«Сенің күлкіңді қайтадан көргім келеді.»',
+   details:[{icon:'🎠',text:'Аттракциондар · Аттракционы'},{icon:'⚡',text:'Адреналин + қызық · Драйв'}],
+   atmosphere:['Жарық · Неон','Жылдам · Скорость','Күлкі · Смех'],extra:'ferris'},
+  {id:4,tag:'Төртінші бөлім · Глава IV',emoji:'🎬',title:'Кино. Бізге арналған фильм.',titleRu:'Кино. Фильм для нас.',
+   quote:'«Давай посмотрим фильм,\nа не будем жить в драме.»',
+   details:[{icon:'🎟️',text:'Кинотеатр немесе үй · Кино или дома'},{icon:'🍿',text:'Попкорн міндетті · Попкорн обязателен'}],
+   atmosphere:['Romance','Жылылық · Тепло','Сергіту · Отдых'],extra:'film'},
+  {id:5,tag:'Бесінші бөлім · Глава V',emoji:'🏠',title:'Отбасыңмен танысу.',titleRu:'Знакомство с семьёй.',
+   quote:'«Мен отбасыңа таныстыруға болатын адам болғым келеді.»',
+   details:[{icon:'🌷',text:'Жылу · Тепло'},{icon:'🤝',text:'Сыйлас · Уважение'}],
+   atmosphere:['Шынайылық · Искренность','Сенімділік · Серьёзность','Жылылық · Тепло'],extra:'home'},
+  {id:6,tag:'Алтыншы бөлім · Глава VI',emoji:'👨‍👩‍👦',title:'Менің отбасыммен танысу.',titleRu:'Знакомство с моей семьёй.',
+   quote:'«Сенің менің әлемімнің бір бөлігі болғыңды қалаймын.»',
+   details:[{icon:'🕯️',text:'Үй жылулығы · Домашний уют'},{icon:'🍽️',text:'Үй асы · Домашний ужин'}],
+   atmosphere:['Шынайы · Настоящее','Үй · Дом','Отбасы · Семья'],extra:'family'},
+  {id:7,tag:'Жетінші бөлім · Глава VII',emoji:'✦',title:'Бірге.',titleRu:'Вместе.',
+   quote:'«Мен мінсіздікті уәде етпеймін.\nБірақ күн сайын тырысатынымды уәде етемін.»',
+   details:[],atmosphere:['Сенім · Доверие','Болашақ · Будущее','Бірге · Вместе'],extra:'final'},
+];
+
+// ═══ STATE ═══
+let unlocked = new Set(JSON.parse(localStorage.getItem(STORAGE_KEY)||'[1]'));
+let pendingUnlock = null, pinInput = '', isPlaying = false, currentTrack = 0;
+function saveUnlocked(){ localStorage.setItem(STORAGE_KEY,JSON.stringify([...unlocked])); }
+
+// ═══ STARS (parallax) ═══
+const sc = document.getElementById('stars');
+const sctx = sc.getContext('2d');
+function resizeStar(){ sc.width=innerWidth; sc.height=innerHeight; }
+resizeStar(); window.addEventListener('resize',resizeStar);
+const STARS = Array.from({length:150},()=>({
+  bx:Math.random(),by:Math.random(),r:Math.random()*1.2,
+  a:0.15+Math.random()*0.65,spd:0.002+Math.random()*0.004,
+  phase:Math.random()*Math.PI*2,depth:0.3+Math.random()*0.7
+}));
+let stT=0, mox=0, moy=0;
+document.addEventListener('mousemove',e=>{mox=(e.clientX/innerWidth-0.5)*28;moy=(e.clientY/innerHeight-0.5)*18;});
+(function animS(){
+  stT+=0.016;
+  sctx.clearRect(0,0,sc.width,sc.height);
+  STARS.forEach(s=>{
+    const px=(s.bx*sc.width+mox*s.depth+sc.width)%sc.width;
+    const py=(s.by*sc.height+moy*s.depth+sc.height)%sc.height;
+    const a=s.a*(0.5+0.5*Math.sin(stT*s.spd*60+s.phase));
+    sctx.beginPath();sctx.arc(px,py,s.r,0,Math.PI*2);
+    sctx.fillStyle=`rgba(201,169,110,${a})`;sctx.fill();
+  });
+  requestAnimationFrame(animS);
+})();
+
+// ═══ TYPEWRITER ═══
+const TW = '«Мен бізде болғанды қайта салғым келеді — және одан да көп.»';
+const twEl = document.getElementById('typewriterEl');
+let twI = 0;
+function typeIt(){
+  if(twI<TW.length){ twEl.textContent+=TW[twI++]; setTimeout(typeIt,60); }
+}
+setTimeout(typeIt,1500);
+
+// ═══ COUNTDOWN for locked cards ═══
+function getCountdownText(){
+  const diff = Math.max(0, TARGET_DATE - new Date());
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  return `<span class="cd-num">${String(d).padStart(2,'0')}</span>д <span class="cd-num">${String(h).padStart(2,'0')}</span>ч <span class="cd-num">${String(m).padStart(2,'0')}</span>м <span class="cd-num">${String(s).padStart(2,'0')}</span>с`;
+}
+// Update countdowns every second
+setInterval(()=>{
+  document.querySelectorAll('.live-countdown').forEach(el=>{el.innerHTML=getCountdownText();});
+},1000);
+
+// ═══ TIMER (modal) ═══
+function getTimerHTML(){
+  const diff=Math.max(0,TARGET_DATE-new Date());
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),
+        m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  return `<p style="font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;opacity:0.7">До первого вечера</p>
+  <div class="timer-box">
+    <div class="timer-unit"><span class="timer-num" id="t-d">${String(d).padStart(2,'0')}</span><span class="timer-label">Күн / Дней</span></div>
+    <div class="timer-colon">:</div>
+    <div class="timer-unit"><span class="timer-num" id="t-h">${String(h).padStart(2,'0')}</span><span class="timer-label">Сағ / Часов</span></div>
+    <div class="timer-colon">:</div>
+    <div class="timer-unit"><span class="timer-num" id="t-m">${String(m).padStart(2,'0')}</span><span class="timer-label">Мин</span></div>
+    <div class="timer-colon">:</div>
+    <div class="timer-unit"><span class="timer-num" id="t-s">${String(s).padStart(2,'0')}</span><span class="timer-label">Сек</span></div>
+  </div>`;
+}
+function startModalTimer(){
+  setInterval(()=>{
+    const diff=Math.max(0,TARGET_DATE-new Date());
+    const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+    const td=document.getElementById('t-d');
+    if(td){
+      td.textContent=String(d).padStart(2,'0');
+      document.getElementById('t-h').textContent=String(h).padStart(2,'0');
+      document.getElementById('t-m').textContent=String(m).padStart(2,'0');
+      document.getElementById('t-s').textContent=String(s).padStart(2,'0');
+    }
+  },1000);
+}
+
+// ═══ EXTRAS ═══
+function getExtraHTML(ch){
+  switch(ch.extra){
+    case 'candles': return `
+      <div class="candles">${[1,2,3].map(i=>`<div class="candle">
+        <div class="candle-glow"></div>
+        <div class="flame" style="animation-delay:${i*0.25}s"></div>
+        <div class="candle-body"></div></div>`).join('')}</div>
+      <div id="timerBox">${getTimerHTML()}</div>
+      <button class="btn-accept" onclick="this.textContent='✓ Қабылданды · Принято';this.style.opacity='0.7'">${ch.acceptLabel}</button>`;
+    case 'ferris': return `
+      <div class="ferris-wrap"><div class="ferris-wheel">
+        <div class="wheel-circle">
+          ${[0,45,90,135,180,225,270,315].map(deg=>`
+            <div class="wheel-spoke" style="transform:rotate(${deg}deg)"></div>
+            <div class="wheel-cabin" style="transform-origin:45px 45px;transform:rotate(${deg}deg) translateY(-41px)"></div>
+          `).join('')}
+        </div><div class="wheel-center"></div></div></div>`;
+    case 'film': return `
+      <div class="film-card">
+        <div class="film-row"><span>GENRE</span><span>Romance · Drama</span></div>
+        <div class="film-row"><span>MAIN CAST</span><span>Біз · Мы</span></div>
+        <div class="film-row"><span>DIRECTOR</span><span>Тағдыр · Судьба</span></div>
+        <div class="film-row"><span>RATING</span><span>★★★★★</span></div>
+        <div class="film-row"><span>FORMAT</span><span>Екеуміз · Вдвоём</span></div>
+      </div>`;
+    case 'final': return `
+      <div style="margin:28px 0;text-align:center">
+        <div style="font-family:'Cinzel',serif;font-size:3.5rem;color:var(--gold);line-height:1;animation:pulse 2s ease-in-out infinite" id="daysTogether">0</div>
+        <div style="font-style:italic;color:var(--muted);font-size:1rem;margin-top:6px">Бірге болған күндер · Дней вместе</div>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px">
+        ${['Сенім · Доверие','Болашақ · Будущее','Бірге · Вместе'].map(w=>`<span style="font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.2em;color:var(--gold);border:1px solid var(--gold-dim);padding:6px 14px;border-radius:2px">${w}</span>`).join('')}
+      </div>
+      <button class="btn-accept" onclick="this.textContent='💛 Ия · Да'">Қайтадан бастаймыз ба? · Начать заново?</button>`;
+    default: return '';
+  }
+}
+
+// ═══ TOAST ═══
+function showToast(msg,dur=3000){
+  const t=document.getElementById('toastEl');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),dur);
+}
+
+// ═══ MUSIC ═══
+const music=document.getElementById('bgMusic');
+const titleEl=document.getElementById('musicTitle');
+const playBtn=document.getElementById('playBtn');
+
+function loadTrack(i){
+  music.src=chapterMusic[i].src;
+  titleEl.textContent=chapterMusic[i].title;
+  if(isPlaying) music.play().catch(()=>{});
+}
 function toggleMusic(){
+  if(isPlaying){music.pause();playBtn.innerHTML='&#9654;';isPlaying=false;}
+  else{music.play().catch(()=>{});playBtn.innerHTML='&#9646;&#9646;';isPlaying=true;}
+}
+function nextMusic(){currentTrack=(currentTrack+1)%chapterMusic.length;loadTrack(currentTrack);}
+function prevMusic(){currentTrack=(currentTrack-1+chapterMusic.length)%chapterMusic.length;loadTrack(currentTrack);}
+music.addEventListener('ended',nextMusic);
+loadTrack(0);
 
-  if(music.paused){
-    music.play();
-  } else {
-    music.pause();
-  }
-
+// ═══ RENDER ═══
+function renderProgress(){
+  const bar=document.getElementById('progressBar');bar.innerHTML='';
+  chapters.forEach((ch,i)=>{
+    const dot=document.createElement('div');
+    const isMax=ch.id===Math.max(...unlocked);
+    dot.className='progress-dot'+(unlocked.has(ch.id)?(isMax?' active':' unlocked'):'');
+    dot.textContent=ch.id;bar.appendChild(dot);
+    if(i<chapters.length-1){
+      const line=document.createElement('div');
+      line.className='progress-line'+(unlocked.has(ch.id)&&unlocked.has(ch.id+1)?' lit':'');
+      bar.appendChild(line);
+    }
+  });
 }
 
-function nextMusic(){
+function renderChapters(){
+  const list=document.getElementById('chapterList');list.innerHTML='';
+  chapters.forEach(ch=>{
+    const isUnlocked=unlocked.has(ch.id);
+    const nextToUnlock=ch.id===Math.max(...unlocked)+1;
+    const card=document.createElement('div');
+    card.className='chapter-card reveal '+(isUnlocked?'unlocked':'locked');
 
-  currentTrack++;
+    // Glow accent border color per chapter
+    if(isUnlocked){
+      card.style.setProperty('--ch-accent', chapterAccents[ch.id-1]);
+    }
 
-  if(currentTrack >= playlist.length){
-    currentTrack = 0;
-  }
+    // Countdown on locked cards
+    const countdownHTML = !isUnlocked ? `
+      <div class="card-countdown">
+        🔒 Ашылады · Откроется:<br>
+        <span class="live-countdown">${getCountdownText()}</span>
+      </div>` : '';
 
-  music.src = playlist[currentTrack].src;
-  title.innerText = playlist[currentTrack].title;
+    card.innerHTML=`
+      <div class="chapter-num">
+        <div class="chapter-num-text">${String(ch.id).padStart(2,'0')}</div>
+        <div class="chapter-num-label">${isUnlocked?'Ашық · Open':'Жабық · Locked'}</div>
+        ${countdownHTML}
+      </div>
+      <div class="chapter-content">
+        <div class="chapter-tag">${ch.tag}</div>
+        <div class="chapter-title">${ch.title}</div>
+        <div class="chapter-desc">${isUnlocked?ch.quote.replace(/\n/g,' '):'— Бұл бөлім әлі жабық · Этот этап ещё закрыт —'}</div>
+      </div>
+      ${!isUnlocked?'<div class="lock-icon">🔒</div>':''}
+      ${!isUnlocked&&nextToUnlock?`<button class="unlock-btn" onclick="openPinModal(${ch.id},event)">PIN → АШУ</button>`:''}
+    `;
+    if(isUnlocked) card.addEventListener('click',()=>openModal(ch.id));
+    list.appendChild(card);
+  });
 
-  music.play();
-
+  setTimeout(()=>{
+    document.querySelectorAll('.reveal').forEach(el=>{
+      const obs=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+      },{threshold:0.08});
+      obs.observe(el);
+    });
+  },100);
 }
 
-function prevMusic(){
+// ═══ MODAL ═══
+function openModal(id){
+  const ch=chapters.find(c=>c.id===id);if(!ch)return;
+  const modal=document.getElementById('chapterModal');
+  const content=document.getElementById('modalContent');
 
-  currentTrack--;
+  // Change body & modal background color per chapter
+  document.body.style.background=chapterBgs[id-1];
+  modal.style.background=chapterBgs[id-1]+'fa';
 
-  if(currentTrack < 0){
-    currentTrack = playlist.length - 1;
+  content.innerHTML=`
+    <p class="modal-chapter-num">${ch.tag}</p>
+    <span class="modal-emoji">${ch.emoji}</span>
+    <h2 class="modal-title">${ch.title}<br><span style="font-size:0.6em;color:var(--muted);font-style:italic">${ch.titleRu}</span></h2>
+    <div class="modal-divider"><div class="mdl"></div><span>✦</span><div class="mdl r"></div></div>
+    <p class="modal-quote">${ch.quote.replace(/\n/g,'<br>')}</p>
+    <div class="modal-details">${ch.details.map(d=>`<div class="modal-detail"><span>${d.icon}</span><span>${d.text}</span></div>`).join('')}</div>
+    <div class="modal-atmosphere">${ch.atmosphere.map(a=>`<div class="atmosphere-tag">${a}</div>`).join('')}</div>
+    ${getExtraHTML(ch)}
+  `;
+
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+
+  // Switch to chapter music
+  currentTrack=id-1;
+  loadTrack(currentTrack);
+
+  if(ch.timer) startModalTimer();
+
+  // Days together for final chapter
+  if(ch.extra==='final'){
+    const diff=new Date()-TARGET_DATE;
+    const days=diff>0?Math.floor(diff/86400000):0;
+    const el=document.getElementById('daysTogether');
+    if(el) el.textContent=days;
   }
-
-  music.src = playlist[currentTrack].src;
-  title.innerText = playlist[currentTrack].title;
-
-  music.play();
-
-}
-
-/* modal */
-
-function openDate(e){
-
-  e.preventDefault();
-
-  document.getElementById('dateModal')
-  .style.display = 'flex';
-
 }
 
 function closeModal(){
-
-  document.getElementById('dateModal')
-  .style.display = 'none';
-
+  document.getElementById('chapterModal').classList.remove('open');
+  document.body.style.overflow='';
+  // Restore dark background
+  setTimeout(()=>{ document.body.style.background=''; },400);
 }
 
-</script>
+// ═══ PIN ═══
+function openPinModal(id,e){
+  e.stopPropagation();
+  pendingUnlock=id;pinInput='';updatePinDots();
+  document.getElementById('pinError').textContent='';
+  document.getElementById('pinSubtitle').textContent=`Бөлім ${id} · Глава ${id}`;
+  document.getElementById('pinOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePinModal(){
+  document.getElementById('pinOverlay').classList.remove('open');
+  document.body.style.overflow='';
+  pendingUnlock=null;pinInput='';updatePinDots();
+}
+function pinKey(d){
+  if(pinInput.length>=4)return;
+  pinInput+=d;updatePinDots();
+  if(pinInput.length===4)setTimeout(checkPin,200);
+}
+function pinDel(){ pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pinError').textContent=''; }
+function updatePinDots(){ document.querySelectorAll('.pin-dot').forEach((dot,i)=>dot.classList.toggle('filled',i<pinInput.length)); }
+function checkPin(){
+  if(pinInput===PIN){
+    const pid=pendingUnlock;
+    unlocked.add(pid);saveUnlocked();
+    closePinModal();
+    showToast(`✦ Бөлім ${pid} ашылды · Глава ${pid} разблокирована!`);
+    renderProgress();renderChapters();
+    setTimeout(()=>openModal(pid),500);
+  } else {
+    document.getElementById('pinError').textContent='✕ Қате код · Неверный код';
+    pinInput='';updatePinDots();
+    const box=document.querySelector('.pin-box');
+    box.style.animation='none';
+    setTimeout(()=>{box.style.animation='shake 0.4s ease';},10);
+  }
+}
 
+// ═══ UTILS ═══
+function scrollToChapters(){ document.getElementById('chaptersSection').scrollIntoView({behavior:'smooth'}); }
+
+document.getElementById('chapterModal').addEventListener('click',function(e){ if(e.target===this)closeModal(); });
+document.getElementById('pinOverlay').addEventListener('click',function(e){ if(e.target===this)closePinModal(); });
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeModal();closePinModal();}
+  if(document.getElementById('pinOverlay').classList.contains('open')){
+    if(e.key>='0'&&e.key<='9')pinKey(e.key);
+    if(e.key==='Backspace')pinDel();
+  }
+});
+
+// pulse keyframe for days counter
+const st=document.createElement('style');
+st.textContent=`@keyframes pulse{0%,100%{text-shadow:0 0 20px rgba(201,169,110,0.3)}50%{text-shadow:0 0 40px rgba(201,169,110,0.7)}}`;
+document.head.appendChild(st);
+
+renderProgress();
+renderChapters();
+</script>
 </body>
 </html>

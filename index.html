@@ -443,8 +443,8 @@ function getExtraHTML(ch){
         <div class="flame" style="animation-delay:${i*0.25}s"></div>
         <div class="candle-body"></div></div>`).join('')}</div>
       <div id="timerBox">${getTimerHTML()}</div>
-      <button class="btn-accept" onclick="this.textContent='✓ Қабылданды · Принято';this.style.opacity='0.7'">
-case 'ferris': return `
+      <button class="btn-accept" onclick="this.textContent='✓ Қабылданды · Принято';this.style.opacity='0.7'">${ch.acceptLabel}</button>`;
+    case 'ferris': return `
       <div class="ferris-wrap"><div class="ferris-wheel">
         <div class="wheel-circle">
           ${[0,45,90,135,180,225,270,315].map(deg=>`

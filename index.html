@@ -538,7 +538,7 @@ function renderChapters(){
       </div>
       <div class="chapter-content">
         <div class="chapter-tag">${ch.tag}</div>
-        <div class="chapter-title">${isUnlocked ? ch.title : '✦ ✦ ✦'}</div>
+        <div class="chapter-title">${ch.id <= 3 ? ch.title : (isUnlocked ? ch.title : '✦ ✦ ✦')}</div>
         <div class="chapter-desc">${isUnlocked?ch.quote.replace(/\n/g,' '):'— Бұл бөлім әлі жабық · Этот этап ещё закрыт —'}</div>
       </div>
       ${!isUnlocked?'<div class="lock-icon">🔒</div>':''}

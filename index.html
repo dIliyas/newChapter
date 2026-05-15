@@ -241,7 +241,12 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div class="pin-overlay" id="pinOverlay">
   <div class="pin-box">
     <p class="pin-title">Бөлімді ашу · Разблокировать</p>
-    <p class="pin-sub" id="pinSubtitle">Введите PIN-код</p>
+    <p class="pin-sub" id="pinSubtitle">
+Введите PIN-код<br>
+<span style="opacity:0.45;font-size:0.85rem">
+Подсказка: особенная дата: 1022
+</span>
+</p>
     <div class="pin-dots" id="pinDots">
       <div class="pin-dot"></div><div class="pin-dot"></div>
       <div class="pin-dot"></div><div class="pin-dot"></div>
@@ -438,8 +443,15 @@ function getExtraHTML(ch){
         <div class="flame" style="animation-delay:${i*0.25}s"></div>
         <div class="candle-body"></div></div>`).join('')}</div>
       <div id="timerBox">${getTimerHTML()}</div>
-      <button class="btn-accept" onclick="this.textContent='✓ Қабылданды · Принято';this.style.opacity='0.7'">${ch.acceptLabel}</button>`;
-    case 'ferris': return `
+<button class="btn-accept" onclick="
+window.open(
+'https://wa.me/77081490663?text=' + 
+encodeURIComponent('Я принимаю приглашение 💛'),
+'_blank'
+);
+this.textContent='✓ Қабылданды · Принято';
+this.style.opacity='0.7';
+">    case 'ferris': return `
       <div class="ferris-wrap"><div class="ferris-wheel">
         <div class="wheel-circle">
           ${[0,45,90,135,180,225,270,315].map(deg=>`
